@@ -1,6 +1,6 @@
 # Set the source and destination folders
-src_folder=../client/build/
-dst_folder=../../../live/YourCorporateMemory/
+src_folder=../client/dist/
+dst_folder=../../../live/socialManager/
 
 #Check if the destination folder exists
 if [ ! -d "$dst_folder" ]; then
