@@ -1,0 +1,59 @@
+:root {
+  --btn-primary: #3b71ca;
+  --btn-secondary: #3b71ca;
+  --btn-success: #14a44d;
+  --btn-danger: crimson;
+  --btn-warning: #e4a11b;
+  --btn-info: #54b4d3;
+  --btn-light: #fbfbfb;
+  --btn-dark: #332d2d;
+}
+
+button {
+  padding: 6px 9px;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--main-font-colour);
+  box-shadow: 0 0 4px #999;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  text-align: center;
+  width: max-content;
+  color: white;
+  border: none;
+  outline: 0.1rem solid white;
+  outline-offset: -0.3rem;
+  opacity: 0.8;
+}
+button:hover {
+  opacity: 1;
+  transition: opacity 0.8s;
+}
+
+button.primary {
+  background: var(--btn-primary);
+}
+button.secondary {
+  background: var(--btn-secondary);
+}
+button.success {
+  background: var(--btn-success);
+}
+button.danger {
+  background: var(--btn-danger);
+}
+button.warning {
+  background: var(--btn-danger);
+}
+button.info {
+  background: var(--btn-info);
+}
+button.light {
+  background: var(--btn-light);
+  color: var(--main-bg-colour);
+  outline: 0.1rem solid var(--main-bg-colour);
+}
+button.dark {
+  background: var(--btn-dark);
+}
