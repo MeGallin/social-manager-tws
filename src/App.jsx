@@ -10,7 +10,7 @@ function App() {
 
   return (
     <Router>
-      <div className="container">
+      <div className="container--fluid">
         <HeaderComponent />
         <Suspense fallback="...loading">
           <div className="content_height_adjuster">
