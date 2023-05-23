@@ -1,5 +1,6 @@
 /* General global stye settings */
 @import './css//scrollBar.css';
+@import './css//fieldSet.css';
 body {
   font-family: 'Signika', sans-serif;
   font-family: 'Comfortaa', cursive;
