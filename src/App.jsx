@@ -7,6 +7,7 @@ import FooterComponent from './Components/Footer/FooterComponent';
 
 function App() {
   const HomeView = lazy(() => import('./Views/HomeView'));
+  const FormsView = lazy(() => import('./Views/FormsView'));
 
   return (
     <Router>
@@ -16,6 +17,7 @@ function App() {
           <div className="content_height_adjuster">
             <Routes>
               <Route path="/" element={<HomeView />} exact />
+              <Route path="/forms" element={<FormsView />} exact />
             </Routes>
           </div>
         </Suspense>
