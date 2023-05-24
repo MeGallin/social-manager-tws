@@ -1,7 +1,86 @@
-import React from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { emailRegEx, passwordRegEx } from '../../Utils/regEx';
+import { InputComponent, ButtonComponent } from '../../Common';
+import { login } from '../../Store/authReducer';
 
 const LoginComponent = () => {
-  return <div>LoginComponent</div>;
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const { email, password } = formData;
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    // Dispatch Action
+    dispatch(login(formData));
+    setFormData({
+      email: '',
+      password: '',
+    });
+  };
+
+  const handleOnchange = (e) => {
+    setFormData((previousState) => ({
+      ...previousState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const userLoginInfo = useSelector((state) => state.userLoginInfo);
+  const { loading, error, success } = userLoginInfo;
+
+  return (
+    <>
+      {!loading ? (
+        <fieldset className="fieldSet">
+          <legend>Login Form</legend>
+          {error ? error : null}
+          {success ? 'Success Message' : null}
+          <form onSubmit={handleLoginSubmit}>
+            <InputComponent
+              id="email"
+              label="email"
+              type="email"
+              name="email"
+              value={email}
+              className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
+              onChange={handleOnchange}
+            />
+            <InputComponent
+              id="password"
+              label="password"
+              type="password"
+              name="password"
+              value={password}
+              required
+              className={!passwordRegEx.test(password) ? 'invalid' : 'entered'}
+              onChange={handleOnchange}
+            />
+
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <ButtonComponent
+                id="submit"
+                type="submit"
+                text={
+                  !emailRegEx.test(email) || password.length <= 5
+                    ? 'disabled'
+                    : 'login'
+                }
+                variant="dark"
+                disabled={!emailRegEx.test(email) || password.length <= 5}
+              />
+            </div>
+          </form>
+        </fieldset>
+      ) : (
+        '...loading'
+      )}
+    </>
+  );
 };
 
 export default LoginComponent;
