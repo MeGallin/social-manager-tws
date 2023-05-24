@@ -5,7 +5,7 @@ import { ButtonComponent } from '../Common';
 const formsView = () => {
   const [toggleView, setToggleView] = useState(true);
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <div>{toggleView ? <LoginComponent /> : <RegisterComponent />}</div>
       <div>
         <ButtonComponent

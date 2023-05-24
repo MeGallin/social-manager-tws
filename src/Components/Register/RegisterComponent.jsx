@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { InputComponent, ButtonComponent } from '../../Common';
 import { nameRegEx, emailRegEx, passwordRegEx } from '../../Utils/regEx';
 
-import { fetchUser } from '../../Store/userReducer';
+import { register } from '../../Store/authReducer';
 
 const RegisterComponent = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const RegisterComponent = () => {
   const handleRegistrationSubmit = (e) => {
     e.preventDefault();
     //Dispatch Action here
-    dispatch(fetchUser(formData));
+    dispatch(register(formData));
 
     setFormData({
       name: '',
@@ -34,8 +34,7 @@ const RegisterComponent = () => {
   };
 
   const userInfo = useSelector((state) => state.userInfo);
-
-  const { user, success, loading, error } = userInfo;
+  const { success, loading, error } = userInfo;
 
   return (
     <>
