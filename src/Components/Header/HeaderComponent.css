@@ -2,6 +2,7 @@
   --active-colour: rgba(200, 200, 200, 0.3);
 }
 header {
-  background-color: black;
+  background-color: var(--main-font-colour);
+  color: var(--main-bg-colour);
   height: var(--header-height);
 }

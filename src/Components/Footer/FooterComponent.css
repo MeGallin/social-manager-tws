@@ -2,7 +2,8 @@
   --footer-font-size: 0.7em;
 }
 footer {
-  background-color: black;
+  background-color: var(--main-font-colour);
+  color: var(--main-bg-colour);
   height: var(--footer-height);
   font-size: var(--footer-font-size);
   text-align: center;
