@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { emailRegEx, passwordRegEx } from '../../Utils/regEx';
 import { InputComponent, ButtonComponent } from '../../Common';
 import { login } from '../../Store/authReducer';
@@ -70,7 +69,11 @@ const LoginComponent = () => {
                     ? 'disabled'
                     : 'login'
                 }
-                variant="dark"
+                variant={
+                  !emailRegEx.test(email) || password.length <= 5
+                    ? 'dark'
+                    : 'success'
+                }
                 disabled={!emailRegEx.test(email) || password.length <= 5}
               />
             </div>

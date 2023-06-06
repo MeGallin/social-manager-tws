@@ -1,24 +1,45 @@
 import { useState } from 'react';
-import { LoginComponent, RegisterComponent } from '../Components';
+import {
+  ForgotPWComponent,
+  LoginComponent,
+  RegisterComponent,
+} from '../Components';
 import { ButtonComponent } from '../Common';
 
-const formsView = () => {
+const FormView = () => {
   const [toggleView, setToggleView] = useState(true);
+  const [toggleForgotPW, setToggleForgotPW] = useState(false);
   return (
     <div style={{ width: '100%' }}>
-      <div>{toggleView ? <LoginComponent /> : <RegisterComponent />}</div>
-      <div>
+      {toggleForgotPW ? (
+        <ForgotPWComponent />
+      ) : (
+        <>
+          {toggleView ? <LoginComponent /> : <RegisterComponent />}
+          <span style={{ marginLeft: '1em', float: 'left' }}>
+            <ButtonComponent
+              id="showRegisterForm"
+              type="button"
+              text={toggleView ? 'register?' : 'login?'}
+              variant="light"
+              disabled={false}
+              onClick={() => setToggleView((prev) => !prev)}
+            />
+          </span>
+        </>
+      )}
+      <span style={{ marginRight: '1em', float: 'right' }}>
         <ButtonComponent
-          id="showRegisterForm"
+          id="showForgotPWForm"
           type="button"
-          text={toggleView ? 'register?' : 'login?'}
-          variant="dark"
+          text={toggleForgotPW ? 'Back to login?' : 'Forgot Password?'}
+          variant="light"
           disabled={false}
-          onClick={() => setToggleView((prev) => (prev = !prev))}
+          onClick={() => setToggleForgotPW((prev) => !prev)}
         />
-      </div>
+      </span>
     </div>
   );
 };
 
-export default formsView;
+export default FormView;

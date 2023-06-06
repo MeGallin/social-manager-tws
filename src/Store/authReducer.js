@@ -1,17 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
 //Register a User
 export const register = createAsyncThunk(
   'user/register',
   async (formData, { rejectWithValue }) => {
     try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
       const { data } = await axios.post(
         `${import.meta.env.VITE_END_POINT}api/v1/user/register`,
         formData,
@@ -25,7 +25,7 @@ export const register = createAsyncThunk(
 );
 
 export const registerSlice = createSlice({
-  name: 'userInfo',
+  name: 'user/register',
   initialState: {
     userInfo: null,
     loading: false,
@@ -46,22 +46,16 @@ export const registerSlice = createSlice({
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.error ? action.error.message : action.payload;
       });
   },
 });
 
 //Login a USER
 export const login = createAsyncThunk(
-  'user/register',
+  'user/login',
   async (formData, { rejectWithValue }) => {
     try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
       const { data } = await axios.post(
         `${import.meta.env.VITE_END_POINT}api/v1/user/login`,
         formData,
@@ -75,7 +69,7 @@ export const login = createAsyncThunk(
 );
 
 export const loginSlice = createSlice({
-  name: 'userInfo',
+  name: 'user/login',
   initialState: {
     userInfo: null,
     loading: false,
@@ -96,10 +90,49 @@ export const loginSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.error ? action.error.message : action.payload;
       });
   },
 });
 
-export const { reducer } = registerSlice;
-export default registerSlice;
+//user forgot PW
+export const forgotPW = createAsyncThunk(
+  'user/forgot-password',
+  async (formData, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_END_POINT}api/v1/user/forgot-password`,
+        formData,
+        config,
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const forgotPWSlice = createSlice({
+  name: 'user/forgot-password',
+  initialState: {
+    loading: false,
+    status: null,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(forgotPW.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(forgotPW.fulfilled, (state, action) => {
+        state.loading = false;
+        state.status = action.payload;
+      })
+      .addCase(forgotPW.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error ? action.error.message : action.payload;
+      });
+  },
+});

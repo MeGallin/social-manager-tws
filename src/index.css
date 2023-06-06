@@ -2,11 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 /* variable setup */
 :root {
-  --main-bg-colour: rgba(32, 32, 32, 1);
+  --main-font-colour: rgba(245, 245, 245, 1);
+  --main-bg-colour: rgba(0, 122, 255, 1);
   --secondary-bg-colour: rgba(255, 99, 0, 1);
   --light-orange: rgba(236, 127, 55, 1);
   --burnt-orange: rgba(190, 79, 12, 1);
-  --main-font-colour: whitesmoke;
   --border-colour: rgba(200, 200, 200, 0.5);
   --border-colour-dark: hsla(0, 1%, 33%, 0.2);
   --border-colour-light: hsla(0, 0%, 78%, 0.2);
