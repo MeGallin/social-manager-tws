@@ -8,6 +8,7 @@ import FooterComponent from './Components/Footer/FooterComponent';
 function App() {
   const HomeView = lazy(() => import('./Views/HomeView'));
   const FormsView = lazy(() => import('./Views/FormsView'));
+  const AdminView = lazy(() => import('./Views/AdminView'));
 
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomeView />} exact />
               <Route path="/forms" element={<FormsView />} exact />
+              <Route path="/admin" element={<AdminView />} exact />
             </Routes>
           </div>
         </Suspense>
