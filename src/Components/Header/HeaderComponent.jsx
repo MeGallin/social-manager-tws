@@ -17,6 +17,12 @@ const HeaderComponent = () => {
         >
           login
         </NavLink>
+        <NavLink
+          className={(navData) => (navData.isActive ? 'active' : '')}
+          to="/admin"
+        >
+          admin
+        </NavLink>
       </nav>
     </header>
   );

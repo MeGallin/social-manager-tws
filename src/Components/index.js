@@ -3,6 +3,7 @@ import HeaderComponent from './Header/HeaderComponent';
 import LoginComponent from './Login/LoginComponent';
 import ForgotPWComponent from './ForgotPW/ForgotPWComponent';
 import RegisterComponent from './Register/RegisterComponent';
+import AdminComponent from './Admin/AdminComponent';
 
 export {
   FooterComponent,
@@ -10,4 +11,5 @@ export {
   LoginComponent,
   ForgotPWComponent,
   RegisterComponent,
+  AdminComponent,
 };
