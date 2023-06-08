@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const config = {
   headers: {
@@ -61,6 +62,8 @@ export const login = createAsyncThunk(
         formData,
         config,
       );
+
+      // Cookies.set('auth_cookie', data?.token, { expires: 7 });
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -75,6 +78,7 @@ export const loginSlice = createSlice({
     loading: false,
     success: false,
     error: null,
+    cookie: Cookies.get('auth_cookie'),
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -87,6 +91,9 @@ export const loginSlice = createSlice({
         state.loading = false;
         state.success = true;
         state.userInfo = action.payload;
+        state.cookie = Cookies.set('auth_cookie', action.payload.token, {
+          expires: 1,
+        });
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
