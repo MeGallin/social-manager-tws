@@ -52,8 +52,8 @@ export const registerSlice = createSlice({
   },
 });
 
-//Login a USER
-export const login = createAsyncThunk(
+//User Login
+export const loginAction = createAsyncThunk(
   'user/login',
   async (formData, { rejectWithValue }) => {
     try {
@@ -83,11 +83,11 @@ export const loginSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(login.pending, (state) => {
+      .addCase(loginAction.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(loginAction.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
         state.userInfo = action.payload;
@@ -95,10 +95,47 @@ export const loginSlice = createSlice({
           expires: 1,
         });
       })
-      .addCase(login.rejected, (state, action) => {
+      .addCase(loginAction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error ? action.error.message : action.payload;
       });
+  },
+});
+
+//Logout a USER
+export const logoutAction = createAsyncThunk('user/logout', () => {
+  return null;
+});
+
+export const logoutSlice = createSlice({
+  name: 'user/logout',
+  initialState: {
+    userInfo: null,
+    loading: false,
+    success: false,
+    error: null,
+    cookie: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(logoutAction.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logoutAction.fulfilled, (state, action) => {
+        state.loading = false;
+        state.cookie = Cookies.remove('auth_cookie', { path: '' });
+        state.success = true;
+        state.userInfo = null;
+      })
+      .addCase(logoutAction.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error ? action.error.message : action.payload;
+      });
+  },
+  reset: (state) => {
+    state = {};
   },
 });
 
