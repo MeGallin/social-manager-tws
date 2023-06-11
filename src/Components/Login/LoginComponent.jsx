@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { emailRegEx, passwordRegEx } from '../../Utils/regEx';
 import { InputComponent, ButtonComponent } from '../../Common';
-import { login } from '../../Store/authReducer';
+import { loginAction } from '../../Store/authReducer';
 
 const LoginComponent = () => {
   const dispatch = useDispatch();
@@ -12,10 +12,12 @@ const LoginComponent = () => {
   });
   const { email, password } = formData;
 
+  const userLoginInfo = useSelector((state) => state.userLoginInfo);
+  const { loading, error, success } = userLoginInfo;
+
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    // Dispatch Action
-    dispatch(login(formData));
+    dispatch(loginAction(formData));
     setFormData({
       email: '',
       password: '',
@@ -28,9 +30,6 @@ const LoginComponent = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
-  const userLoginInfo = useSelector((state) => state.userLoginInfo);
-  const { loading, error, success } = userLoginInfo;
 
   return (
     <>

@@ -7,12 +7,14 @@ const AdminComponent = () => {
   const navigate = useNavigate();
   const userLoginInfo = useSelector((state) => state.userLoginInfo);
   const { cookie } = userLoginInfo;
+  const logoutInfo = useSelector((state) => state.logoutInfo);
+  const { success: logoutSuccess } = logoutInfo;
 
   useEffect(() => {
-    if (!cookie) {
+    if (!cookie || logoutSuccess) {
       navigate('/forms');
     }
-  });
+  }, [cookie, logoutSuccess]);
 
   return (
     <>
